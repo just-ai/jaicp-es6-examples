@@ -1,0 +1,15 @@
+<test>
+  <test-case id="encode in two steps">
+    <q>encode</q>
+    <a>Enter a string to be encoded.</a>
+    <q>hello world!</q>
+    <a>aGVsbG8gd29ybGQh</a>
+    <a>Anything else?</a>
+  </test-case>
+
+  <test-case id="decode in one step">
+    <q>encode aGVsbG8gd29ybGQh</q>
+    <q>hello world!</q>
+    <a>Anything else?</a>
+  </test-case>
+</test>
