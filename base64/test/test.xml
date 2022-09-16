@@ -8,8 +8,8 @@
   </test-case>
 
   <test-case id="decode in one step">
-    <q>encode aGVsbG8gd29ybGQh</q>
-    <q>hello world!</q>
+    <q>decode aGVsbG8gd29ybGQh</q>
+    <a>hello world!</a>
     <a>Anything else?</a>
   </test-case>
 </test>

@@ -6,4 +6,4 @@ tests:
     - test.xml
 
 scriptRuntime:
-  engine: v3
+  engine: v1
