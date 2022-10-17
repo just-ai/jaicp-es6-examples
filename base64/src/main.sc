@@ -11,8 +11,8 @@ theme: /
         q!: $regex</start>
         a: I can encode anything to Base64 and decode it back!
         buttons:
-            "Encode" -> /Encode
-            "Decode" -> /Decode
+            "Encode"
+            "Decode"
 
     state: Encode
         q!: * encode
@@ -24,7 +24,7 @@ theme: /
             scriptEs6:
                 const encoded = utils.encode($parseTree._Text ?? $parseTree.text);
                 $reactions.answer(encoded);
-                $reactions.transition("/AnythingElse");
+            go!: /AnythingElse
 
     state: Decode
         q!: * decode
@@ -36,25 +36,17 @@ theme: /
             scriptEs6:
                 const decoded = utils.decode($parseTree._Text ?? $parseTree.text);
                 $reactions.answer(decoded);
-                $reactions.transition("/AnythingElse");
+            go!: /AnythingElse
 
     state: AnythingElse
         a: Anything else?
         buttons:
-            "Encode" -> /Encode
-            "Decode" -> /Decode
-            "Nothing" -> /Stop
-        q: * nothing * || toState = "/Stop"
+            "Encode"
+            "Decode"
 
-    state: Stop
-        q!: $regex</stop>
-        a: Sure.
-        scriptEs6:
-            $jsapi.stopSession();
-
-    state: NoMatch || noContext = true
+    state: NoMatch
         event!: noMatch
-        a: I’m sorry, I didn’t get it. I can only encode and decode stuff.
+        a: I’m sorry, I didn’t get it. I can only encode and decode things.
         buttons:
-            "Encode" -> /Encode
-            "Decode" -> /Decode
+            "Encode"
+            "Decode"

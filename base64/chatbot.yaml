@@ -1,9 +1,7 @@
-name: new-js-runtime-example-base64
+name: es6-example-base64
+
 entryPoint: main.sc
 
 tests:
   include:
     - test.xml
-
-scriptRuntime:
-  engine: v1
