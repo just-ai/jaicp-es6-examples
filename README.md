@@ -1,5 +1,8 @@
-# JAICP. New JS runtime bot examples
+# JAICP ES6 bot examples
 
-This is a collection of JAICP bot projects which demonstrate the features of the new JavaScript runtime.
+This is a collection of bot projects which demonstrate the features of the ECMAScript 6 implementation in JAICP.
 
-Go to a subdirectory to view the project code and deploy it to JAICP.
+Go to a subdirectory to browse the project code and deploy it to JAICP:
+
+- [`base64`](./base64/)
+- [`various-packages`](./various-packages/)
