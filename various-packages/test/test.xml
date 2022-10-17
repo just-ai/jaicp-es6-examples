@@ -1,0 +1,22 @@
+<test>
+  <test-case id="math">
+    <state>Math</state>
+    <q>1.2 / (3.3 + 1.7)</q>
+    <a>0.24</a>
+    <a state="/AnythingElse"/>
+  </test-case>
+
+  <test-case id="validator">
+    <state>Validator</state>
+    <q>123456789</q>
+    <a>Doesn’t look like a postal code to me.</a>
+    <a state="/AnythingElse"/>
+  </test-case>
+
+  <test-case id="voca">
+    <state>Voca</state>
+    <q>hello world</q>
+    <a>In camel case, this would be “helloWorld”.</a>
+    <a state="/AnythingElse"/>
+  </test-case>
+</test>

@@ -1,0 +1,7 @@
+name: es6-example-packages
+
+entryPoint: main.sc
+
+tests:
+  include:
+    - test.xml
