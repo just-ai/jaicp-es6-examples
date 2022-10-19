@@ -12,12 +12,11 @@ theme: /
     state: CheckConnectionString
         scriptEs6:
             try {
-                const connectionString = $secrets.get("mongoDbConnectionString"); // Will throw if secret is missing
-                mongo.initClient(connectionString);
+                mongo.initClient($secrets.get("mongoDbConnectionString")); // Will throw if secret is missing
             } catch (err) {
                 $reactions.transition("/NoConnectionString");
             }
-        a: MongoDB connection established.
+        a: MongoDB client initialized successfully.
         a: I will use the {{$injector.dbCollection}} collection in the {{$injector.dbName}} database.
         go!: /Actions
 

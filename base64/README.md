@@ -1,4 +1,4 @@
-# base64
+# JAICP ES6 bot example: Base64
 
 A bot project which demonstrates the features of the ECMAScript 6 implementation in JAICP.
 

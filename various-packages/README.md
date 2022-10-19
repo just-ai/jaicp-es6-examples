@@ -1,4 +1,4 @@
-# various-packages
+# JAICP ES6 bot example: various packages
 
 A bot project which demonstrates the features of the ECMAScript 6 implementation in JAICP.
 
