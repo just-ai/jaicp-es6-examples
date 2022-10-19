@@ -14,7 +14,7 @@ async function find(query) {
   await client.connect();
   const collection = client.db(dbName).collection(dbCollection);
 
-  const result = await collection.find(query ? { input: query } : {}).toArray();
+  const result = await collection.find(query ? { query } : {}).toArray();
 
   await client.close();
   return result;
@@ -26,7 +26,7 @@ async function insert(query) {
   const collection = client.db(dbName).collection(dbCollection);
 
   const result = await collection.insertOne({
-    input: query,
+    query,
     datetime: new Date().toString(),
   });
 

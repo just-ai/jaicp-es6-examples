@@ -30,34 +30,34 @@ theme: /
     state: Actions
         a: What should I do?
         buttons:
-            "Find one element" -> ./FindOne
-            "Find all elements" -> ./FindAll
-            "Insert element" -> ./Insert
+            "Find one document" -> ./FindOne
+            "Find all documents" -> ./FindAll
+            "Add document" -> ./Insert
 
         state: FindOne
-            a: What should I search for?
+            a: Tell me the query to search the document by.
 
             state: SearchQuery
                 q: *
                 scriptEs6:
-                    const element = await mongo.find($request.query);
-                    $reactions.answer(`Here’s what I found: ${JSON.stringify(element)}`);
+                    const document = await mongo.find($request.query);
+                    $reactions.answer(`Here’s what I found: ${JSON.stringify(document)}`);
                 go!: /Actions
 
         state: FindAll
             scriptEs6:
-                const elements = await mongo.find();
-                $reactions.answer(`Here are the last few elements: ${elements.slice(-5).map(JSON.stringify)}`);
+                const documents = await mongo.find();
+                $reactions.answer(`Here are the last few documents: ${documents.slice(-5).map(JSON.stringify)}`);
             go!: /Actions
 
         state: Insert
-            a: What should I insert to the database?
+            a: Send me some random text. I’ll use it as the “query” property value of the document.
 
             state: InsertQuery
                 q: *
                 scriptEs6:
                     const insertedId = await mongo.insert($request.query);
-                    $reactions.answer(`Element inserted with _id ${insertedId}.`);
+                    $reactions.answer(`Document added with _id ${insertedId}.`);
                 go!: /Actions
 
     state: NoMatch
