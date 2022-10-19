@@ -15,10 +15,10 @@ theme: /
 
     state: CheckCredentials
         scriptEs6:
-            if (utils.secretsNotDefined()) {
-                $reactions.transition("/NoCredentials");
-            } else {
+            try {
                 s3.initClient($secrets.get("awsAccessKeyId"), $secrets.get("awsSecretAccessKey"));
+            } catch (err) {
+                $reactions.transition("/NoCredentials");
             }
         a: S3 client initialized successfully.
         go!: /ShowBuckets
@@ -65,7 +65,10 @@ theme: /
     state: NoMatch
         event!: noMatch
         a: I’m sorry, I didn’t get it. I’m but a mere S3 bucket browser.
-        if: utils.secretsNotDefined()
-            go!: /NoCredentials
-        else:
-            go!: /Actions
+        scriptEs6:
+            try {
+                $secrets.get("awsAccessKeyId") || $secrets.get("awsSecretAccessKey");
+            } catch (err) {
+                $reactions.transition("/NoCredentials");
+            }
+        go!: /ShowBuckets
