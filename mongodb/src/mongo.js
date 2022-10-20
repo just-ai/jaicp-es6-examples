@@ -12,8 +12,8 @@ function initClient() {
 async function find(query) {
   await client.connect();
   const collection = client
-    .db($env.get("dbName"))
-    .collection($env.get("dbCollection"));
+    .db($env.get("mongoDbName"))
+    .collection($env.get("mongoDbCollection"));
 
   const result = await collection.find(query ? { query } : {}).toArray();
 
@@ -24,8 +24,8 @@ async function find(query) {
 async function insert(query) {
   await client.connect();
   const collection = client
-    .db($env.get("dbName"))
-    .collection($env.get("dbCollection"));
+    .db($env.get("mongoDbName"))
+    .collection($env.get("mongoDbCollection"));
 
   const result = await collection.insertOne({
     query,

@@ -17,9 +17,9 @@ function initClient() {
       accessKeyId: $secrets.get("awsAccessKeyId"),
       secretAccessKey: $secrets.get("awsSecretAccessKey"),
     },
-    endpoint: $env.get("endpoint"),
+    endpoint: $env.get("awsEndpoint"),
     s3ForcePathStyle: true,
-    region: $env.get("region"),
+    region: $env.get("awsRegion"),
     apiVersion: "latest",
   });
 }

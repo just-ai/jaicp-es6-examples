@@ -6,5 +6,5 @@ injector:
   secrets:
     - mongoDbConnectionString
   variables:
-    - dbName
-    - dbCollection
+    - mongoDbName
+    - mongoDbCollection

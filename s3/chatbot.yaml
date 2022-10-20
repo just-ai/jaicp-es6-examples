@@ -7,5 +7,5 @@ injector:
     - awsAccessKeyId
     - awsSecretAccessKey
   variables:
-    - endpoint
-    - region
+    - awsEndpoint
+    - awsRegion

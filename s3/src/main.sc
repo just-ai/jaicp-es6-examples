@@ -26,7 +26,7 @@ theme: /
     state: NoCredentials
         a: To use my features, use the JAICP secrets and variables to store your AWS credentials:
             * Store your access and secret keys in two secrets: “awsAccessKeyId” and “awsSecretAccessKey”.
-            * Store the endpoint and region in two environment variables: “endpoint” and “region”.
+            * Store the endpoint and region in two environment variables: “awsEndpoint” and “awsRegion”.
         a: Deploy them and tell me once you’re done.
         buttons:
             "Done" -> /CheckCredentials

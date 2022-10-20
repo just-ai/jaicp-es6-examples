@@ -21,13 +21,12 @@ theme: /
                 $reactions.transition("/NoCredentials");
             }
         a: MongoDB client initialized successfully.
-        a: I will use the {{$env.get("dbCollection")}} collection in the {{$env.get("dbName")}} database.
         go!: /Actions
 
     state: NoCredentials
         a: To use my features, use the JAICP secrets and variables to store your MongoDB credentials:
             * Store your deployment’s connection string in a secret called “mongoDbConnectionString”.
-            * Store the database and collection names in two environment variables: “dbName” and “dbCollection”.
+            * Store the database and collection names in two environment variables: “mongoDbName” and “mongoDbCollection”.
         a: Deploy them and tell me once you’re done.
         buttons:
             "Done" -> /CheckCredentials
