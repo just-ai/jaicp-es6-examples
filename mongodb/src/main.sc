@@ -2,30 +2,35 @@ require: mongo.js
     type = scriptEs6
     name = mongo
 
+require: utils.js
+    type = scriptEs6
+    name = utils
+
 theme: /
 
     state: Start
         q!: $regex</start>
-        a: I can write data to a MondoDB collection and read it back from it.
-        go!: /CheckConnectionString
+        a: I can write data to a MondoDB collection and read it back.
+        go!: /CheckCredentials
 
-    state: CheckConnectionString
+    state: CheckCredentials
         scriptEs6:
-            try {
-                mongo.initClient($secrets.get("mongoDbConnectionString")); // Will throw if secret is missing
-            } catch (err) {
-                $reactions.transition("/NoConnectionString");
+            if (utils.allSecretsAndVariablesDefined()) {
+                mongo.initClient();
+            } else {
+                $reactions.transition("/NoCredentials");
             }
         a: MongoDB client initialized successfully.
-        a: I will use the {{$injector.dbCollection}} collection in the {{$injector.dbName}} database.
+        a: I will use the {{$env.get("dbCollection")}} collection in the {{$env.get("dbName")}} database.
         go!: /Actions
 
-    state: NoConnectionString
-        a: To use my features, please configure a secret called “mongoDbConnectionString” in your project.
-        a: Use it to store your MongoDB deployment’s connection string.
-        a: Tell me once you’re done.
+    state: NoCredentials
+        a: To use my features, use the JAICP secrets and variables to store your MongoDB credentials:
+            * Store your deployment’s connection string in a secret called “mongoDbConnectionString”.
+            * Store the database and collection names in two environment variables: “dbName” and “dbCollection”.
+        a: Deploy them and tell me once you’re done.
         buttons:
-            "Done" -> /CheckConnectionString
+            "Done" -> /CheckCredentials
 
     state: Actions
         a: What should I do?
@@ -63,7 +68,7 @@ theme: /
     state: NoMatch
         event!: noMatch
         a: I’m sorry, I didn’t get it. I can only do simple read/write operations with MongoDB.
-        if: $secrets.get("mongoDbConnectionString", null) === null
-            go!: /NoConnectionString
-        else:
+        if: utils.allSecretsAndVariablesDefined()
             go!: /Actions
+        else:
+            go!: /NoCredentials

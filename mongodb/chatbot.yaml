@@ -3,5 +3,8 @@ name: es6-example-mongodb
 entryPoint: main.sc
 
 injector:
-  dbName: test_database
-  dbCollection: test_collection
+  secrets:
+    - mongoDbConnectionString
+  variables:
+    - dbName
+    - dbCollection

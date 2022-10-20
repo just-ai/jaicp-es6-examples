@@ -2,17 +2,18 @@ import { MongoClient } from "mongodb";
 
 let client;
 
-function initClient(url) {
+function initClient() {
   if (client) {
     return; // Skip if already initialized
   }
-  client = new MongoClient(url);
+  client = new MongoClient($secrets.get("mongoDbConnectionString"));
 }
 
 async function find(query) {
-  const { dbName, dbCollection } = $jsapi.context().injector;
   await client.connect();
-  const collection = client.db(dbName).collection(dbCollection);
+  const collection = client
+    .db($env.get("dbName"))
+    .collection($env.get("dbCollection"));
 
   const result = await collection.find(query ? { query } : {}).toArray();
 
@@ -21,9 +22,10 @@ async function find(query) {
 }
 
 async function insert(query) {
-  const { dbName, dbCollection } = $jsapi.context().injector;
   await client.connect();
-  const collection = client.db(dbName).collection(dbCollection);
+  const collection = client
+    .db($env.get("dbName"))
+    .collection($env.get("dbCollection"));
 
   const result = await collection.insertOne({
     query,

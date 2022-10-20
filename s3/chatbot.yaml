@@ -3,5 +3,9 @@ name: es6-example-s3
 entryPoint: main.sc
 
 injector:
-  endpoint: https://s3.storage.selcloud.ru
-  region: ru-1
+  secrets:
+    - awsAccessKeyId
+    - awsSecretAccessKey
+  variables:
+    - endpoint
+    - region

@@ -8,15 +8,18 @@ import utils from "./utils.js";
 
 let client;
 
-function initClient(accessKeyId, secretAccessKey) {
+function initClient() {
   if (client) {
     return; // Skip if already initialized
   }
   client = new S3Client({
-    credentials: { accessKeyId, secretAccessKey },
-    endpoint: $injector.endpoint,
+    credentials: {
+      accessKeyId: $secrets.get("awsAccessKeyId"),
+      secretAccessKey: $secrets.get("awsSecretAccessKey"),
+    },
+    endpoint: $env.get("endpoint"),
     s3ForcePathStyle: true,
-    region: $injector.region,
+    region: $env.get("region"),
     apiVersion: "latest",
   });
 }

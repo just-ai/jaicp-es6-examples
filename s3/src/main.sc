@@ -15,18 +15,19 @@ theme: /
 
     state: CheckCredentials
         scriptEs6:
-            try {
-                s3.initClient($secrets.get("awsAccessKeyId"), $secrets.get("awsSecretAccessKey"));
-            } catch (err) {
+            if (utils.allSecretsAndVariablesDefined()) {
+                s3.initClient();
+            } else {
                 $reactions.transition("/NoCredentials");
             }
         a: S3 client initialized successfully.
         go!: /ShowBuckets
 
     state: NoCredentials
-        a: To use my features, please configure two secrets in your project: “awsAccessKeyId” and “awsSecretAccessKey”.
-        a: Use them to store your AWS credentials.
-        a: Tell me once you’re done.
+        a: To use my features, use the JAICP secrets and variables to store your AWS credentials:
+            * Store your access and secret keys in two secrets: “awsAccessKeyId” and “awsSecretAccessKey”.
+            * Store the endpoint and region in two environment variables: “endpoint” and “region”.
+        a: Deploy them and tell me once you’re done.
         buttons:
             "Done" -> /CheckCredentials
 
@@ -65,10 +66,7 @@ theme: /
     state: NoMatch
         event!: noMatch
         a: I’m sorry, I didn’t get it. I’m but a mere S3 bucket browser.
-        scriptEs6:
-            try {
-                $secrets.get("awsAccessKeyId") || $secrets.get("awsSecretAccessKey");
-            } catch (err) {
-                $reactions.transition("/NoCredentials");
-            }
-        go!: /ShowBuckets
+        if: utils.allSecretsAndVariablesDefined()
+            go!: /ShowBuckets
+        else:
+            go!: /NoCredentials
