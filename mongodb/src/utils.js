@@ -1,7 +1,7 @@
 function allSecretsAndVariablesDefined() {
   try {
-    $injector.secrets.forEach((secret) => $secrets.get(secret));
-    $injector.variables.forEach((variable) => $env.get(variable));
+    $injector.secrets.forEach($secrets.get);
+    $injector.variables.forEach($env.get);
   } catch (err) {
     return false;
   }
