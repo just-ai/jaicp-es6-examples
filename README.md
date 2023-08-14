@@ -6,5 +6,6 @@ Go to a subdirectory to browse the project code and deploy it to JAICP:
 
 - [`base64`](./base64/)
 - [`mongodb`](./mongodb/)
+- [`pdf-reader`](./pdf-reader/)
 - [`s3`](./s3/)
 - [`various-packages`](./various-packages/)
