@@ -15,7 +15,7 @@ theme: /
     state: AcceptFile
         event!: fileEvent
         scriptEs6:
-            // We need to clear the persistent file directory to avoid exceeding the storage quota,
+            // Here we clear the temporary file directory to avoid exceeding the storage quota,
             // as well as possible name collisions with any files previously uploaded by this user.
             await $storage.clear();
             const fileObject = $request.data.eventData[0];
@@ -35,9 +35,9 @@ theme: /
 
     state: PaginateFile
         scriptEs6:
-            // JAICP does NOT guarantee that the storage still exists.
+            // JAICP does NOT guarantee that the file still exists.
             // The script may have exceeded the storage quota, or the container running the bot may have been restarted.
-            // In any of these events, the storage is recreated from scratch.
+            // In any of these events, the temporary storage is cleared.
             // It is important that your script always check that the necessary file is still available.
             let pdfContent;
             try {

@@ -6,9 +6,8 @@ import { PdfReader } from "pdfreader";
 const pdfReader = new PdfReader();
 
 async function downloadPdf(url, userId) {
-  // Here we retrieve the path to a persistent file directory.
-  // It is always destroyed automatically after request processing has finished.
-  // There is also a `$storage.getRequestDir` method that allows access to a per-request temp directory.
+  // Here we retrieve the path to a temporary file directory.
+  // The file will still be there after request processing has finished.
   const dir = await $storage.getTempDir();
   const filePath = path.join(dir, `${userId}-${path.basename(url)}`);
 
