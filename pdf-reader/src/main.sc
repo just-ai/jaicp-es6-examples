@@ -56,10 +56,10 @@ theme: /
             $reactions.answer(paragraphs[$session.currentPage]);
 
             const buttons = [];
-            if (paragraphs.length > 0 && $session.currentPage > 0) {
+            if (paragraphs.length > 1 && $session.currentPage > 0) {
                 buttons.push({ text: "Prev", transition: "/PaginateFile/Prev" });
             }
-            if (paragraphs.length > 0 && $session.currentPage < paragraphs.length - 1) {
+            if (paragraphs.length > 1 && $session.currentPage < paragraphs.length - 1) {
                 buttons.push({ text: "Next", transition: "/PaginateFile/Next" });
             }
             if (buttons.length > 0) {
