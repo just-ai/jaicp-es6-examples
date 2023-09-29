@@ -1,0 +1,7 @@
+name: es6-example-openai-translator
+
+entryPoint: main.sc
+
+injector:
+  secrets:
+    - openaiApiKey
