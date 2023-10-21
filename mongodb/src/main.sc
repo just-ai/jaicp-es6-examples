@@ -67,7 +67,5 @@ theme: /
     state: NoMatch
         event!: noMatch
         a: I’m sorry, I didn’t get it. I can only do simple read/write operations with MongoDB.
-        if: utils.allSecretsAndVariablesDefined()
-            go!: /Actions
-        else:
-            go!: /NoCredentials
+        scriptEs6:
+            $reactions.transition(utils.allSecretsAndVariablesDefined() ? "/Actions" : "/NoCredentials");

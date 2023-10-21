@@ -66,7 +66,5 @@ theme: /
     state: NoMatch
         event!: noMatch
         a: I’m sorry, I didn’t get it. I’m but a mere S3 bucket browser.
-        if: utils.allSecretsAndVariablesDefined()
-            go!: /ShowBuckets
-        else:
-            go!: /NoCredentials
+        scriptEs6:
+            $reactions.transition(utils.allSecretsAndVariablesDefined() ? "/ShowBuckets" : "/NoCredentials");
